@@ -8,7 +8,43 @@ namespace Nox7atra.UIFigmaGradients
     public class UIFigmaGradientAngularDrawer : UIFigmaGradientLinearDrawer
     {
         [SerializeField] protected Vector2 _Center;
-        protected override Material GradientMaterial => new Material(Shader.Find("UI/AngularGradientShader"));
+        
+        [SerializeField] 
+        private Shader _angularGradientShader;
+
+        private Material _cachedGradientMaterial;
+
+        protected override Material GradientMaterial
+        {
+            get
+            {
+                // Ensure the shader is assigned
+                if (_angularGradientShader == null)
+                {
+                    _angularGradientShader = Shader.Find("UI/AngularGradientShader");
+
+                    if (_angularGradientShader == null)
+                    {
+                        Debug.LogError("Shader 'UI/AngularGradientShader' not found! Please ensure it exists.");
+                        return null;
+                    }
+
+                    // Mark for serialization in the editor
+#if UNITY_EDITOR
+                    UnityEditor.EditorUtility.SetDirty(this);
+#endif
+                }
+
+                // Cache the material for efficiency
+                if (_cachedGradientMaterial == null)
+                {
+                    _cachedGradientMaterial = new Material(_angularGradientShader);
+                }
+
+                return _cachedGradientMaterial;
+            }
+        }
+
         protected override TextureWrapMode WrapMode => TextureWrapMode.Repeat;
 
         

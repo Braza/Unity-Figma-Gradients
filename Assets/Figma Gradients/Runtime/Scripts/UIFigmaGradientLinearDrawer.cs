@@ -16,10 +16,48 @@ namespace Nox7atra.UIFigmaGradients
     
       [SerializeField] 
       protected float _Angle = 180;
+      
+      [SerializeField] 
+      private Shader _linearGradientShader;
+
+      private Material _cachedGradientMaterial;
+
 
       private Texture2D _GradientTexture;
       protected virtual TextureWrapMode WrapMode => TextureWrapMode.Clamp;
-      protected virtual Material GradientMaterial => new Material(Shader.Find("UI/LinearGradientShader"));
+      // Updated to return cached material with dynamically assigned shader
+      protected virtual Material GradientMaterial
+      {
+         get
+         {
+            // Ensure the shader is assigned
+            if (_linearGradientShader == null)
+            {
+               // Try to find the shader during runtime or edit-time
+               _linearGradientShader = Shader.Find("UI/LinearGradientShader");
+
+               if (_linearGradientShader == null)
+               {
+                  Debug.LogError("Shader 'UI/LinearGradientShader' not found! Please ensure it exists.");
+                  return null;
+               }
+
+               // Mark the field for serialization in the editor
+#if UNITY_EDITOR
+                    UnityEditor.EditorUtility.SetDirty(this);
+#endif
+            }
+
+            // Cache the material for efficiency
+            if (_cachedGradientMaterial == null)
+            {
+               _cachedGradientMaterial = new Material(_linearGradientShader);
+            }
+
+            return _cachedGradientMaterial;
+         }
+      }
+
       public override Texture mainTexture => _GradientTexture;
 #if UNITY_EDITOR
       protected override void OnValidate()
