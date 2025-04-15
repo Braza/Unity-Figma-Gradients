@@ -34,7 +34,7 @@ namespace Nox7atra.UIFigmaGradients
                     // Warn if the shader could not be found
                     if (_radialGradientShader == null)
                     {
-                        Debug.LogError("Shader 'UI/RadialGradientShader' not found! Please ensure it exists.");
+                        Debug.LogWarning("Shader 'UI/RadialGradientShader' not found! Please ensure it exists.");
                         return null;
                     }
 

@@ -38,7 +38,7 @@ namespace Nox7atra.UIFigmaGradients
 
                if (_linearGradientShader == null)
                {
-                  Debug.LogError("Shader 'UI/LinearGradientShader' not found! Please ensure it exists.");
+                  Debug.LogWarning("Shader 'UI/LinearGradientShader' not found! Please ensure it exists.");
                   return null;
                }
 

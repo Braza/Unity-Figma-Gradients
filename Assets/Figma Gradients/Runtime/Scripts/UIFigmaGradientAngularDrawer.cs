@@ -25,7 +25,7 @@ namespace Nox7atra.UIFigmaGradients
 
                     if (_angularGradientShader == null)
                     {
-                        Debug.LogError("Shader 'UI/AngularGradientShader' not found! Please ensure it exists.");
+                        Debug.LogWarning("Shader 'UI/AngularGradientShader' not found! Please ensure it exists.");
                         return null;
                     }
 
