@@ -20,7 +20,7 @@ namespace Nox7atra.UIFigmaGradients
       [SerializeField] 
       private Shader _linearGradientShader;
 
-      private Material _cachedGradientMaterial;
+      protected Material _cachedGradientMaterial;
 
 
       private Texture2D _GradientTexture;

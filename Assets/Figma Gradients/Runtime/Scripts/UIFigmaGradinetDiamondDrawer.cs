@@ -9,8 +9,6 @@ namespace Nox7atra.UIFigmaGradients
         [SerializeField]
         private Shader _diamondGradientShader;
 
-        private Material _cachedGradientMaterial;
-
         protected override Material GradientMaterial
         {
             get
