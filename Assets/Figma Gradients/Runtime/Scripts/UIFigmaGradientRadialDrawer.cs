@@ -12,9 +12,6 @@ namespace Nox7atra.UIFigmaGradients
         // Serialized shader field, automatically filled if empty
         [SerializeField] private Shader _radialGradientShader;
 
-        // Serialized gradient material, to cache the created material
-        private Material _cachedGradientMaterial;
-
         [SerializeField] protected Vector2 _Center;
         [Range(0.01f, 10)]
         [SerializeField] protected float _Radius1 = 1;
